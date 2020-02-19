@@ -90,7 +90,9 @@ simmod = sim2mod(m,s);
 simExporter(simdata, '/mnt/scratch/lotrecks/INCA_sims/simdata')
 
 %%%% 2. Flux Manipulation in the INCA model followed by Label Simulation
+disp('before loop')
 for N = 1:500
+    disp(['iteration #' int2str(N)])
     % Select the Reaction ID names to be changed to new flux values
     rxn_chng = myFreeFluxes(1);
     % Cell numbers you want to change the flux values of
@@ -99,6 +101,7 @@ for N = 1:500
     % otherwise it will be rebalanced after flux feasibility adjustment
     m.rates.flx.fix(idx_chng) = 1;
     % Now change the fluxes of interest to a new value
+    disp('changing the fluxes')
     for N = 1:numel(idx_chng)
         origFlux = m.rates.flx.val(N);
 
@@ -117,7 +120,7 @@ for N = 1:500
         % assign new flux 
         m.rates.flx.val(idx_chng(N)) = newFlux;
     end
-
+    disp('removing inactive fluxes')
     % remove inactive fluxes
     fluxVals = m.rates.flx.val;
     fluxVals(index) = [];
@@ -125,12 +128,15 @@ for N = 1:500
     % Let INCA reconcile the flux values to ensure network feasibility.
     % Overwrite the flux values in the model with adjusted new flux values.
     % Need to select row# for m.rates.flx.val, otherwise a matrix will be assigned
+    disp('reconciling flux values')
     fluxVals(1:length(fluxVals)) = mod2stoich(m);
 
     % Simulating new isotope labeling data based on the model with flux values
     % changed and adjusted.
+    disp('simulating new labeling data')
     s  = simulate(m);
     % Copy new simulated measurements into model and assign it to new model
+    disp('assigning new model')
     simmod_new = sim2mod(m,s); 
     % Extract simulated measurements from the new model,
     % simdata_new contains the simulated isotope labeling data based on new
@@ -146,6 +152,7 @@ for N = 1:500
     % filenames of each csv output files
     % Each metabolite is saved separately since they vary in matrix size
     metabolites = ['/mnt/scratch/lotrecks/INCA_sims/' int2str(N) '_simdata']
+    disp(metabolites)
     simExporter(simdata_new, metabolites)
 
     %%% 4. Export flux data to CSV files
@@ -157,5 +164,7 @@ for N = 1:500
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
     fluxes = ['/mnt/scratch/lotrecks/INCA_sims/' int2str(N) '_flux_after_manipulation' ]
+    disp(fluxes)
     fluxExporter(m, fluxes)
 end
+
