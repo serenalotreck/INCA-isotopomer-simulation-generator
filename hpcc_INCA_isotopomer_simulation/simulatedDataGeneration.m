@@ -145,7 +145,8 @@ for N = 1:500
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
     % Each metabolite is saved separately since they vary in matrix size
-    simExporter(simdata_new, ['/mnt/scratch/lotrecks/INCA_sims/simdata_' int2str(N)])
+    metabolites = ['/mnt/scratch/lotrecks/INCA_sims/' int2str(N) '_simdata']
+    simExporter(simdata_new, metabolites)
 
     %%% 4. Export flux data to CSV files
 
@@ -155,5 +156,6 @@ for N = 1:500
     % to export the flux properties
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
-    fluxExporter(m, ['/mnt/scratch/lotrecks/INCA_sims/flux_after_manipulation_' int2str(N)])
+    fluxes = ['/mnt/scratch/lotrecks/INCA_sims/' int2str(N) '_flux_after_manipulation' ]
+    fluxExporter(m, fluxes)
 end
