@@ -4,7 +4,7 @@
 % function, in the future want to figure out how to get those through the
 % inca command line rather than having to manually find them in the gui 
 
-function [myFreeFluxes,allFluxValues] = getFreeFluxes(model,inactive1)
+function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
 
     % get S object 
     % S is the stoich object, which contains: 

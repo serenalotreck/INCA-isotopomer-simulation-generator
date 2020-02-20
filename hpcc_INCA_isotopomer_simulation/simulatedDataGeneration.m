@@ -9,7 +9,7 @@
 %%% 1. Model pre-processing
 
 % cd to inca directory 
-cd /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8_copy/INCAv1.8
+cd /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8
 
 % load model 
 basemodel = load('MSUmodel_v1.mat');
@@ -21,7 +21,7 @@ inactive1 = {strcat(influxID1, '.f')};
 
 
 % get free fluxes 
-[myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
+[myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1);
 
 % get the indices of free fluxes 
 % Select the Reaction ID names to be changed to new flux values
@@ -30,7 +30,7 @@ rxn_chng = myFreeFluxes;
 [~,idx_chng] = ismember(rxn_chng,m.rates.flx.id);
 
 % get biologically relevant ranges for all free fluxes
-fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
+fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues);
 
 %%% 2. Initial labeling simulation using the INCA model
 disp('performing initial simulation')

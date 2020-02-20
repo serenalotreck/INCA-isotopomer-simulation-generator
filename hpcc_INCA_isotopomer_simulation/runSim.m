@@ -15,20 +15,20 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
     disp('assigning new flux values')
     for I = 1:numel(idx_chng)
         % get index  of flux
-        fluxIndex = idx_chng(I)
+        fluxIndex = idx_chng(I);
         
         % get flux ID and confirm that it's the right one
-        fluxID1 = m.rates.flx.id(fluxIndex)
-        fluxID2 = myFreeFluxes(I)
+        fluxID1 = m.rates.flx.id(fluxIndex);
+        fluxID2 = myFreeFluxes(I);
         if fluxID1 == fluxID2
             disp('flux IDs are equivalent')
         else
             disp('flux IDs are not equivalent, check code!')
         end 
-        fluxID = {fluxID1}
+        fluxID = {fluxID1};
         
         % get range for this flux
-        fluxRange = fluxRanges(fluxID)
+        fluxRange = fluxRanges(fluxID);
         
         % randomly assign new flux within range 
         newFlux = (fluxRange(2) - fluxRange(1)).*rand + fluxRange(1);

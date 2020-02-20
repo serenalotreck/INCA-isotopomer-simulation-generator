@@ -19,5 +19,5 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
             rangeNum = abs(origFluxVal)*3;
             fluxRange = [origFluxVal-rangeNum 0];
         end
-        fluxRanges(origFluxID) = fluxRange
+        fluxRanges(origFluxID) = fluxRange;
     end
