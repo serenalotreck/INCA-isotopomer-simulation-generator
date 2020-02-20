@@ -8,8 +8,8 @@
 
 % add inca directory and directory with scripts to path
 addpath /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8
-cd /mnt/home/lotrecks/Shachar-Hill-Lab/Shachar-Hill-Lab-MFA-ML
-addpath
+addpath /mnt/home/lotrecks/Shachar-Hill-Lab/Shachar-Hill-Lab-MFA-ML
+
 
 % load model 
 basemodel = load('MSUmodel_v1.mat');
