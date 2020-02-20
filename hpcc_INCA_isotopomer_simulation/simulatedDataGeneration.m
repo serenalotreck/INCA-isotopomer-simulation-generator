@@ -1,15 +1,15 @@
 % Author: Serena Lotreck, lotrecks@msu.edu 
 % with code taken from Xinyu Fu, fuxinyu2@msu.edu
 % this script is hard coded to generate simulated data for the MSU model
-% currently, these scripts have to be inside INCA folder  (MATLAB throws 
-% an error for setpath when run non-interactively)
 
 %%%% RUN IN SCRATCH %%%%
 
 %%% 1. Model pre-processing
 
-% cd to inca directory 
-cd /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8
+% add inca directory and directory with scripts to path
+addpath /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8
+cd /mnt/home/lotrecks/Shachar-Hill-Lab/Shachar-Hill-Lab-MFA-ML
+addpath
 
 % load model 
 basemodel = load('MSUmodel_v1.mat');
