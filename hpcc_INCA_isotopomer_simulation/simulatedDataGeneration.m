@@ -1,10 +1,12 @@
 % Author: Serena Lotreck, lotrecks@msu.edu 
 % with code taken from Xinyu Fu, fuxinyu2@msu.edu
 % this script is hard coded to generate simulated data for the MSU model
-% currently, these scripts have to be inside INCA folder (can't figure out 
-% why MATLAB throws an error for setpath when run non-interactively)
+% currently, these scripts have to be inside INCA folder  (MATLAB throws 
+% an error for setpath when run non-interactively)
 
 %%%% RUN IN SCRATCH %%%%
+
+%%% 1. Model pre-processing
 
 % cd to inca directory 
 cd /mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8_copy/INCAv1.8
@@ -17,14 +19,21 @@ m = basemodel.m;
 influxID1 = 'Suc_out-HLacc';
 inactive1 = {strcat(influxID1, '.f')};
 
+
+% get free fluxes 
 [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% from INCA_isotopomer_simulation_script_x4.m, Xinyu Fu
-% modified by SL 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% get the indices of free fluxes 
+% Select the Reaction ID names to be changed to new flux values
+rxn_chng = myFreeFluxes;
+% Cell numbers you want to change the flux values of
+[~,idx_chng] = ismember(rxn_chng,m.rates.flx.id);
 
-%%% 1. Labeling simulation using the INCA model
+% get biologically relevant ranges for all free fluxes
+fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
+
+%%% 2. Initial labeling simulation using the INCA model
+disp('performing initial simulation')
 
 % Change nonstationary simulation: relative integration tolerance for MID (reltol)
 m.options.int_reltol = 0.0001; %default is 0.001
@@ -38,58 +47,12 @@ simmod = sim2mod(m,s);
 [~,simdata] = mod2mat(simmod);
 simExporter(simdata, '/mnt/scratch/lotrecks/INCA_sims/simdata')
 
-%%%% 2. Flux Manipulation in the INCA model followed by Label Simulation
-disp('before loop')
-for N = 1:500
-    disp(['iteration #' int2str(N)])
-    
-    
-
-        
-   
-    disp('removing inactive fluxes')
-    
-    % Let INCA reconcile the flux values to ensure network feasibility.
-    % Overwrite the flux values in the model with adjusted new flux values.
-    % Need to select row# for m.rates.flx.val, otherwise a matrix will be assigned
-    disp('reconciling flux values')
-    allFluxValues(1:length(allFluxValues)) = mod2stoich(m);
-
-    % Simulating new isotope labeling data based on the model with flux values
-    % changed and adjusted.
-    disp('simulating new labeling data')
-    s  = simulate(m);
-    % Copy new simulated measurements into model and assign it to new model
-    disp('assigning new model')
-    simmod_new = sim2mod(m,s); 
-    % Extract simulated measurements from the new model,
-    % simdata_new contains the simulated isotope labeling data based on new
-    % flux values
-    [~,simdata_new] = mod2mat(simmod_new);
-
-    %%% 3. Export simulated labeling data to CSV files
-
-    % Make sure simExporter.m is in the working directory
-    % The simExporter(simdata, simID) function is to export simdata as csv
-    % 1st argument is the simulated data (saved in simdata or simdata_new)
-    % 2nd argurment is a string used as an idenfier and will appear in the
-    % filenames of each csv output files
-    % Each metabolite is saved separately since they vary in matrix size
-    disp(['N = ' int2str(N)])
-    metabolites = ['/mnt/scratch/lotrecks/INCA_sims/' iteration_num '_simdata']
-    disp(metabolites)
-    simExporter(simdata_new, metabolites)
-
-    %%% 4. Export flux data to CSV files
-
-    % Make sure fluxExporter.m is in the working directory
-    % The fluxExporter(model, filename) function is to export flux properties as csv
-    % 1st argument is an .mod object from the INCA model, from which you want
-    % to export the flux properties
-    % 2nd argurment is a string used as an idenfier and will appear in the
-    % filenames of each csv output files
-    fluxes = ['/mnt/scratch/lotrecks/INCA_sims/' iteration_num '_flux_after_manipulation' ]
-    disp(fluxes)
-    fluxExporter(m, fluxes)
+%%%% 3. Flux Manipulation in the INCA model followed by Label Simulation
+%%%% and data export
+for N = 1:200 
+    iteration_num = int2str(N)
+    disp(['simulation # ' iteration_num])
+    runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
 end
+
 

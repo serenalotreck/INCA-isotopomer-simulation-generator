@@ -6,6 +6,7 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
     %%% returns a struct object where keys are flux names and 
     %%% values are a vector of len 2, indicating the start and end of the
     %%% flux range
+    
     fluxRanges = containers.Map
     for M = 1:numel(idx_chng)
         origFluxIndex = idx_chng(M);
