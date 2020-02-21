@@ -39,7 +39,7 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     % get rid of inactive flux from ID vector and flux value vector
     fluxIDs(index) = [];
     
-    allFluxValues = m.rates.flx.val
+    allFluxValues = m.rates.flx.val;
     allFluxValues(index) = [];
 
     % get indices for the true (free) fluxes 
