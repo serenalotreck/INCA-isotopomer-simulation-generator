@@ -7,9 +7,10 @@
 %%% 1. Model pre-processing
 
 % add inca directory and directory with scripts to path
-addpath(genpath('/mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8')) 
-cd /mnt/home/lotrecks/Shachar-Hill-Lab/Shachar-Hill-Lab-MFA-ML
-
+%addpath(genpath('/mnt/gs18/scratch/users/lotrecks/SHLab-copy/INCAv1.8')) 
+%cd /mnt/home/lotrecks/Shachar-Hill-Lab/Shachar-Hill-Lab-MFA-ML
+addpath(genpath('~/Shachar-Hill_Lab/INCAv1.8')) 
+cd ~/GitHub/Shachar-Hill-Lab-MFA-ML/hpcc_INCA_isotopomer_simulation/
 
 % load model 
 basemodel = load('MSUmodel_v1.mat');

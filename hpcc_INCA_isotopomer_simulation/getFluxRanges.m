@@ -10,8 +10,8 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
     fluxRanges = containers.Map
     for M = 1:numel(idx_chng)
         origFluxIndex = idx_chng(M);
-        origFluxID = {myFreeFluxes(M)}
-	disp(origFluxID)
+        origFluxID = myFreeFluxes(M)
+        origFluxID = origFluxID{1}
         origFluxVal = allFluxValues(origFluxIndex)
         if origFluxVal > 0
             rangeNum = origFluxVal*3;
