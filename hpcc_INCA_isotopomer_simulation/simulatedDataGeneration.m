@@ -1,5 +1,5 @@
 % Author: Serena Lotreck, lotrecks@msu.edu 
-% with code taken from Xinyu Fu, fuxinyu2@msu.edu
+% with code from Xinyu Fu, fuxinyu2@msu.edu
 % this script is hard coded to generate simulated data for the MSU model
 
 %%%% RUN IN SCRATCH %%%%
@@ -22,8 +22,7 @@ inactive1 = {strcat(influxID1, '.f')};
 % get free fluxes 
 [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1);
 
-% get the indices of free fluxes 
-% Select the Reaction ID names to be changed to new flux values
+% get the indices of free fluxes (to be changed to new flux values)
 rxn_chng = myFreeFluxes;
 % Cell numbers you want to change the flux values of
 [~,idx_chng] = ismember(rxn_chng,m.rates.flx.id);

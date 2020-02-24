@@ -18,15 +18,8 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
         fluxIndex = idx_chng(I);
         
         % get flux ID and confirm that it's the right one
-        fluxID1 = m.rates.flx.id(fluxIndex);
-        flux
-        fluxID2 = myFreeFluxes(I){1};
-        if fluxID1 == fluxID2
-            disp('flux IDs are equivalent')
-        else
-            disp('flux IDs are not equivalent, check code!')
-        end 
-        fluxID = {fluxID1};
+        fluxID = m.rates.flx.id(fluxIndex);
+        fluxID = fluxID{1};
         
         % get range for this flux
         fluxRange = fluxRanges(fluxID);
@@ -35,7 +28,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
         newFlux = (fluxRange(2) - fluxRange(1)).*rand + fluxRange(1);
 
         % assign new flux 
-        m.rates.flx.val(idx_chng(M)) = newFlux;
+        m.rates.flx.val(idx_chng(I)) = newFlux;
     end
     
     % Let INCA reconcile the flux values to ensure network feasibility.
