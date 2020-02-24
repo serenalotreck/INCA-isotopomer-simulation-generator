@@ -18,8 +18,8 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
         fluxIndex = idx_chng(I);
         
         % get flux ID and confirm that it's the right one
-        fluxID1 = m.rates.flx.id(fluxIndex);
-        fluxID2 = myFreeFluxes(I);
+        fluxID1 = m.rates.flx.id(fluxIndex){1};
+        fluxID2 = myFreeFluxes(I){1};
         if fluxID1 == fluxID2
             disp('flux IDs are equivalent')
         else
