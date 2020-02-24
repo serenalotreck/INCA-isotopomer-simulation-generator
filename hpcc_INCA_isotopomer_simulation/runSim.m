@@ -36,7 +36,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
         newFlux = (fluxRange(2) - fluxRange(1)).*rand + fluxRange(1);
 
         % assign new flux 
-        m.rates.flx.val(idx_chng(M)) = newFlux;
+        m.rates.flx.val(idx_chng(I)) = newFlux;
     end
     
     % Let INCA reconcile the flux values to ensure network feasibility.
