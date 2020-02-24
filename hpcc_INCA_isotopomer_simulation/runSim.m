@@ -27,7 +27,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
         else
             disp('flux IDs are not equivalent, check code!')
         end 
-        fluxID = {fluxID1};
+        fluxID = fluxID1;
         
         % get range for this flux
         fluxRange = fluxRanges(fluxID);
