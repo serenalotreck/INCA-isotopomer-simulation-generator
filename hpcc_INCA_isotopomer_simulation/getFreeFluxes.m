@@ -21,7 +21,7 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     % S.vf is unlabeled. To identify which fluxes are which, we need the 
     % vector of flux id's, which corresponds to the entries in all the elements
     % of the S object.
-    fluxIDs = m.rates.flx.id; 
+    fluxIDs = m.rates.flx.id
 
     % remove inactivated reactions from the fluxIDs vector
     % unclear how to do this generalizably, at the moment just opening the
@@ -37,10 +37,10 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     end 
 
     % get rid of inactive flux from ID vector and flux value vector
-    fluxIDs(index) = [];
+    fluxIDs(index) = []
     
     allFluxValues = m.rates.flx.val;
-    allFluxValues(index) = [];
+    allFluxValues(index) = []
 
     % get indices for the true (free) fluxes 
     indices = [];
@@ -54,7 +54,7 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     myFreeFluxes = [];
     for N = 1:numel(fluxIDs)
         if ismember(N,indices)
-            myFreeFluxes = [myFreeFluxes fluxIDs(N)];
+            myFreeFluxes = [myFreeFluxes fluxIDs(N)]
         end
     end
 end

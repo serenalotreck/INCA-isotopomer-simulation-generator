@@ -12,7 +12,7 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
         origFluxIndex = idx_chng(M);
         origFluxID = myFreeFluxes(M);
         origFluxID = origFluxID{1};
-        origFluxVal = allFluxValues(origFluxIndex);
+        origFluxVal = allFluxValues(origFluxIndex)
         if origFluxVal > 0
             rangeNum = origFluxVal*3;
             fluxRange = [0 origFluxVal+rangeNum];
@@ -22,5 +22,3 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_chng,allFluxValues)
         end
         fluxRanges(origFluxID) = fluxRange;
     end
-    disp(fluxRanges)
-end 
