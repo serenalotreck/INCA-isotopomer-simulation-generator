@@ -56,8 +56,9 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     for N = 1:numel(fluxIDs)
         if ismember(N,indices)
             disp(N)
-            myFreeFluxes = [myFreeFluxes fluxIDs(N)]
+            myFreeFluxes = [myFreeFluxes fluxIDs(N)];
         end
     end
+    disp(myFreeFluxes)
 end
 
