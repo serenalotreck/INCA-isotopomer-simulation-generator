@@ -54,8 +54,8 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     % use these indices to get free fluxes in a new vector
     myFreeFluxes = [];
     for N = 1:numel(fluxIDs)
-        disp(N)
         if ismember(N,indices)
+            disp(N)
             myFreeFluxes = [myFreeFluxes fluxIDs(N)]
         end
     end
