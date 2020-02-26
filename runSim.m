@@ -7,7 +7,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     dofRemaining = numel(myFreeFluxes) - alreadyFixed
     
     % randomly select index values for the free fluxes to be fixed
-    randomInd = randperm(idx_free)
+    randomInd = randperm(length(idx_free))
     randomInd = randomInd(1:dofRemaining)
     
     % It's very important to fix the flux to be changed before changing it
