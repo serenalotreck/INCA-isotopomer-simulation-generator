@@ -18,11 +18,13 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     disp('assigning new flux values')
     for I = 1:numel(randomInd)
         % get index  of flux
-        fluxIndex = randomInd(I);
+        fluxIndex = randomInd(I)
         
         % get flux ID 
-        fluxID = m.rates.flx.id(fluxIndex);
-        fluxID = fluxID{1};
+        fluxID = m.rates.flx.id(fluxIndex)
+        fluxID = fluxID{1}
+        
+        disp('fluxRanges keys: ' keys(fluxRanges)])
         
         % get range for this flux
         fluxRange = fluxRanges(fluxID);
