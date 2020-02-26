@@ -31,7 +31,7 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     % find index of this flux in ID vector 
     index = [];
     for N = 1:numel(fluxIDs)
-        if strcmp(fluxIDs(N),inactive1)
+        if any(strcmp(inactive1,fluxIDs(N)))
             index = [index N];
         end 
     end 
