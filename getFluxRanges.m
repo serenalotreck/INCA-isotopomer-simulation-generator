@@ -7,7 +7,7 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_free,allFluxValues)
     %%% values are a vector of len 2, indicating the start and end of the
     %%% flux range
     
-    fluxRanges = containers.Map
+    fluxRanges = containers.Map;
     for M = 1:numel(idx_free)
         origFluxIndex = idx_free(M);
         origFluxID = myFreeFluxes(M);
@@ -22,5 +22,4 @@ function fluxRanges = getFluxRanges(myFreeFluxes,idx_free,allFluxValues)
         end
         fluxRanges(origFluxID) = fluxRange;
     end
-    disp(fluxRanges)
 end 

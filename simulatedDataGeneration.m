@@ -31,7 +31,7 @@ disp(inactive1)
 fluxRanges = getFluxRanges(myFreeFluxes,idx_free,allFluxValues);
 
 % determine how many fluxes are already fixed 
-alreadyFixed = nnz(m.rates.flx.fix)
+alreadyFixed = nnz(m.rates.flx.fix);
 disp(['Number of fluxes already fixed:' int2str(alreadyFixed)])
 
 %%% 2. Initial labeling simulation using the INCA model
@@ -52,9 +52,9 @@ simExporter(simdata, '/mnt/scratch/lotrecks/INCA_sims/simdata')
 %%%% 3. Flux Manipulation in the INCA model followed by Label Simulation
 %%%% and data export
 for N = 1:200 
-    iteration_num = int2str(N)
+    iteration_num = int2str(N);
     disp(['simulation # ' iteration_num])
-    runSim(myFreeFluxes,allFluxValues,idx_free,m,fluxRanges,iteration_num)
+    runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num)
 end
 
 
