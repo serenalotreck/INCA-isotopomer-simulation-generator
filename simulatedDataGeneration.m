@@ -24,16 +24,15 @@ disp(inactive1)
 % get free fluxes 
 [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1);
 
-% get the ID's of free fluxes (to be changed to new flux values)
-rxn_chng = myFreeFluxes;
-disp('myFreeFluxes and rxn_chng set difference (should be 0):')
-disp(setdiff(rxn_chng,myFreeFluxes))
-
-% get 
-[~,idx_free] = ismember(rxn_chng,m.rates.flx.id);
+% get indices of free fluxes in whole model flux ID vector
+[~,idx_free] = ismember(myFreeFluxes,m.rates.flx.id);
 
 % get biologically relevant ranges for all free fluxes
 fluxRanges = getFluxRanges(myFreeFluxes,idx_free,allFluxValues);
+
+% determine how many fluxes are already fixed 
+alreadyFixed = nnz(m.rates.flx.fix)
+disp(['Number of fluxes already fixed:' int2str(alreadyFixed)])
 
 %%% 2. Initial labeling simulation using the INCA model
 disp('performing initial simulation')
