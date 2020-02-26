@@ -26,9 +26,9 @@ disp(inactive1)
 
 % get the ID's of free fluxes (to be changed to new flux values)
 rxn_chng = myFreeFluxes;
-disp('myFreeFluxes and rxn_chng')
-disp(myFreeFluxes)
-disp(rxn_chng)
+disp('myFreeFluxes and rxn_chng equivalency')
+disp(rxn_chng == myFreeFluxes)
+
 % get 
 [~,idx_free] = ismember(rxn_chng,m.rates.flx.id);
 
