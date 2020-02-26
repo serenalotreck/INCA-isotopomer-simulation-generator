@@ -9,6 +9,8 @@ function runSim(myFreeFluxes,allFluxValues,idx_chng,m,fluxRanges,iteration_num)
     [~,idx_chng] = ismember(rxn_chng,m.rates.flx.id);
     % It's very important to fix the flux to be changed before changing it
     % otherwise it will be rebalanced after flux feasibility adjustment
+    disp('Number of fluxes already fixed:')
+    disp(nnz(m.rates.flx.fix))
     m.rates.flx.fix(idx_chng) = 1;
     
     % Now change the fluxes of interest to a new value
