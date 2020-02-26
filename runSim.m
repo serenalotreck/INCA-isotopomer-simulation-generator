@@ -24,7 +24,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
         fluxID = m.rates.flx.id(fluxIndex)
         fluxID = fluxID{1}
         
-        disp('fluxRanges keys: ' keys(fluxRanges)])
+        disp(['fluxRanges keys: ' keys(fluxRanges)])
         
         % get range for this flux
         fluxRange = fluxRanges(fluxID);
