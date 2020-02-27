@@ -4,7 +4,7 @@
 % function, in the future want to figure out how to get those through the
 % inca command line rather than having to manually find them in the gui 
 
-function [myFreeFluxes,fluxIDs] = getFreeFluxes(m,inactive1)
+function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
 
     % get S object 
     % S is the stoich object, which contains: 
@@ -39,8 +39,8 @@ function [myFreeFluxes,fluxIDs] = getFreeFluxes(m,inactive1)
     % get rid of inactive flux from ID vector and flux value vector
     fluxIDs(inacIndex) = [];
     
-    allFluxValues = m.rates.flx.val
-    allFluxValues(inacIndex) = []
+    allFluxValues = m.rates.flx.val;
+    allFluxValues(inacIndex) = [];
     
     % get indices for the true (free) fluxes 
     freeIndices = [];
