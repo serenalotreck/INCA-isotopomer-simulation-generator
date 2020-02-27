@@ -12,7 +12,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     randomFluxes = idx_free(randomInd)
     
     %%DEBUGGING%%
-    
+   
     
     % It's very important to fix the flux to be changed before changing it
     % otherwise it will be rebalanced after flux feasibility adjustment
@@ -20,9 +20,9 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     
     % Now change the fluxes of interest to a new value
     disp('assigning new flux values')
-    for I = 1:numel(randomInd)
+    for I = 1:numel(randomFluxes)
         % get index  of flux
-        fluxIndex = randomInd(I)
+        fluxIndex = randomFluxes(I)
         
         % get flux ID 
         fluxID = m.rates.flx.id(fluxIndex)
