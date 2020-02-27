@@ -35,7 +35,7 @@ alreadyFixed = nnz(m.rates.flx.fix);
 disp(['Number of fluxes already fixed:' int2str(alreadyFixed)])
 
 %%% 2. Initial labeling simulation using the INCA model
-disp('Performing initial simulation')
+disp('==== Initial simulation ====')
 
 % Change nonstationary simulation: relative integration tolerance for MID (reltol)
 m.options.int_reltol = 0.0001; %default is 0.001
@@ -54,7 +54,7 @@ simExporter(simdata, [outputPath 'simdata'])
 %%%% and data export
 for N = 1:200 
     iteration_num = int2str(N);
-    disp(['====Simulation # ' iteration_num '===='])
+    disp(['==== Simulation # ' iteration_num ' ===='])
     runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num,outputPath)
 end
 
