@@ -9,14 +9,13 @@ You will also need INCA. [Get it here](http://mfa.vueinnovations.com/licensing/m
 ## Usage 
 At the moment, file paths and number of simulations must be hard coded. Steps to customize this module: 
 1. In simulatedDataGeneration.m, replace the file paths in section 1. (Model pre-processing) to the INCA folder and the repository. 
-2. In the last line of section 2. (Initial labeling simulation using the INCA model), change the file path to where you want to store your output. 
-3. In section 3. (Flux Manipulation in the INCA model followed by Label Simulation and data export), change the upper bound on the range N = 1:200 to the number of simulations you want. 
-4. In runSim.m, scroll to the end and change '/mnt/scratch/lotrecks/INCA_sims/' to the path of the directory where you wish to store your output (could be the same or different than the path in 2. of simulatedDataGeneration.m). 
-5. Define inactive fluxes (see 2. in **Important Assumptions and Behaviors**)
+2. At the end of section 2, change the `outputPath` variable to the path where simulation outputs will be stored. 
+3. In section 3. (Flux Manipulation in the INCA model followed by Label Simulation and data export), change the upper bound on the range N = 1:200 to the number of simulations you want.  
+4. Define inactive fluxes (see 2. in **Important Assumptions and Behaviors**)
 
 After customizing file paths, inactive fluxes, and simulation number, the program can either be run interactively in MATLAB, or non-interactively from the command line by running: 
     matlab -nodisplay -r 'simulatedDataGeneration'
-from the INCA-isotopomer-simulation-generator directory
+from the `INCA-isotopomer-simulation-generator` directory
 
 ## Important Assumptions and Behaviors 
 1. Fixed fluxes
