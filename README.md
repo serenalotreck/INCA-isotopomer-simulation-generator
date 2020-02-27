@@ -1,6 +1,7 @@
 # INCA-isotopomer-simulation-generator
 A software package to generate multiple simulations of 13-C INST-MFA labeling data for a given metabolic model  <br>
 Authors: Serena Lotreck (lotrecks@msu.edu) and Xinyu Fu (fuxinyu2@msu.edu) 
+**PLEASE NOTE:** This package is under active development, and is currently not ready for use
 
 ## Requirements 
 In order to run this software you must have MATLAB 2018a. [Get it here](https://www.mathworks.com/products/new_products/release2018a.html) <br>
