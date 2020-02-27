@@ -47,14 +47,15 @@ s  = simulate(m);
 simmod = sim2mod(m,s); 
 % Extract simulated measurements from the model
 [~,simdata] = mod2mat(simmod);
-simExporter(simdata, '/mnt/scratch/lotrecks/INCA_sims/simdata')
+outputPath = '/mnt/scratch/lotrecks/INCA_sims/'
+simExporter(simdata, [outputPath 'simdata'])
 
 %%%% 3. Flux Manipulation in the INCA model followed by Label Simulation
 %%%% and data export
 for N = 1:200 
     iteration_num = int2str(N);
     disp(['simulation # ' iteration_num])
-    runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num)
+    runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num,outputPath)
 end
 
 

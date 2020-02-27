@@ -1,7 +1,7 @@
 % Author: Serena Lotreck, lotrecks@msu.edu
 % this function runs 1 simulation
 
-function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num)
+function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num,outputPath)
 
     % determine how many degrees of freedom remain
     dofRemaining = numel(myFreeFluxes) - alreadyFixed
@@ -63,7 +63,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
     % Each metabolite is saved separately since they vary in matrix size
-    metabolites = ['/mnt/scratch/lotrecks/INCA_sims/' iteration_num '_simdata']
+    metabolites = [outputPath iteration_num '_simdata']
     disp(metabolites)
     simExporter(simdata_new, metabolites)
     
@@ -74,7 +74,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % to export the flux properties
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
-    fluxes = ['/mnt/scratch/lotrecks/INCA_sims/' iteration_num '_flux_after_manipulation' ]
+    fluxes = [outputPath iteration_num '_flux_after_manipulation' ]
     disp(fluxes)
     fluxExporter(m, fluxes)
     
