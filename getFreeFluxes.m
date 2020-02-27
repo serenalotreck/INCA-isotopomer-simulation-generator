@@ -4,7 +4,7 @@
 % function, in the future want to figure out how to get those through the
 % inca command line rather than having to manually find them in the gui 
 
-function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
+function [myFreeFluxes,fluxID] = getFreeFluxes(m,inactive1)
 
     % get S object 
     % S is the stoich object, which contains: 
@@ -21,7 +21,7 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     % S.vf is unlabeled. To identify which fluxes are which, we need the 
     % vector of flux id's, which corresponds to the entries in all the elements
     % of the S object.
-    allFluxValues = m.rates.flx.id;
+    fluxIDs = m.rates.flx.id;
 
     % remove inactivated reactions from the fluxIDs vector
     % unclear how to do this generalizably, at the moment just opening the
@@ -30,13 +30,16 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
 
     % find index of this flux in ID vector 
     inacIndex = [];
-    for N = 1:numel(allFluxValues)
-        if any(strcmp(inactive1,allFluxValues(N)))
+    for N = 1:numel(fluxIDs)
+        if any(strcmp(inactive1,fluxIDs(N)))
             inacIndex = [inacIndex N];
         end 
     end 
 
     % get rid of inactive flux from ID vector and flux value vector
+    fluxID(inacIndex) = [];
+    
+    allFluxValues = m.rates.flx.val;
     allFluxValues(inacIndex) = [];
 
     % get indices for the true (free) fluxes 
@@ -50,9 +53,9 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
 
     % use these indices to get free fluxes in a new vector
     myFreeFluxes = [];
-    for N = 1:numel(allFluxValues)
+    for N = 1:numel(fluxID)
         if ismember(N,freeIndices)
-            myFreeFluxes = [myFreeFluxes allFluxValues(N)];
+            myFreeFluxes = [myFreeFluxes fluxID(N)];
         end
     end
     disp(myFreeFluxes)
