@@ -26,6 +26,7 @@ disp(inactive1)
 
 % get indices of free fluxes in whole model flux ID vector
 [~,idx_free] = ismember(myFreeFluxes,m.rates.flx.id);
+disp('using idx_free to generate myFreeFluxes2 and check equivalency with myFreeFluxes')
 
 % get biologically relevant ranges for all free fluxes
 fluxRanges = getFluxRanges(myFreeFluxes,idx_free,allFluxValues);
