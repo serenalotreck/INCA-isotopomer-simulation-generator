@@ -4,31 +4,26 @@
 function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,iteration_num,outputPath)
 
     % determine how many degrees of freedom remain
-    dofRemaining = numel(myFreeFluxes) - alreadyFixed
+    dofRemaining = numel(myFreeFluxes) - alreadyFixed;
     
     % randomly select index values for the free fluxes to be fixed
-    randomInd = randperm(length(idx_free))
-    randomInd = randomInd(1:dofRemaining)
-    randomFluxes = idx_free(randomInd)
-    
-    %%DEBUGGING%%
-   
+    randomInd = randperm(length(idx_free));
+    randomInd = randomInd(1:dofRemaining);
+    randomFluxes = idx_free(randomInd);
     
     % It's very important to fix the flux to be changed before changing it
     % otherwise it will be rebalanced after flux feasibility adjustment
     m.rates.flx.fix(randomInd) = 1;
     
     % Now change the fluxes of interest to a new value
-    disp('assigning new flux values')
+    disp('    Assigning new flux values')
     for I = 1:numel(randomFluxes)
         % get index  of flux
-        fluxIndex = randomFluxes(I)
+        fluxIndex = randomFluxes(I);
         
         % get flux ID 
-        fluxID = m.rates.flx.id(fluxIndex)
-        fluxID = fluxID{1}
-        
-        disp(['fluxRanges keys: ' keys(fluxRanges)])
+        fluxID = m.rates.flx.id(fluxIndex);
+        fluxID = fluxID{1};
         
         % get range for this flux
         fluxRange = fluxRanges(fluxID);
@@ -43,16 +38,16 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % Let INCA reconcile the flux values to ensure network feasibility.
     % Overwrite the flux values in the model with adjusted new flux values.
     % Need to select row# for m.rates.flx.val, otherwise a matrix will be assigned
-    disp('reconciling flux values')
+    disp('    Reconciling flux values')
     allFluxValues(1:length(allFluxValues)) = mod2stoich(m);
 
     % Simulating new isotope labeling data based on the model with flux values
     % changed and adjusted.
-    disp('simulating new labeling data')
+    disp('    Simulating new labeling data')
     s  = simulate(m);
     
     % Copy new simulated measurements into model and assign it to new model
-    disp('assigning new model')
+    disp('    Assigning new model')
     simmod_new = sim2mod(m,s);
     
     % Extract simulated measurements from the new model,
@@ -60,6 +55,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % flux values
     [~,simdata_new] = mod2mat(simmod_new);
     
+    disp('    Exporting simulation')
     % Export simulated labeling data to CSV files
     % Make sure simExporter.m is in the working directory
     % The simExporter(simdata, simID) function is to export simdata as csv
@@ -67,8 +63,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
     % Each metabolite is saved separately since they vary in matrix size
-    metabolites = [outputPath iteration_num '_simdata']
-    disp(metabolites)
+    metabolites = [outputPath iteration_num '_simdata'];
     simExporter(simdata_new, metabolites)
     
     % Export flux data to CSV files
@@ -78,8 +73,7 @@ function runSim(myFreeFluxes,allFluxValues,idx_free,alreadyFixed,m,fluxRanges,it
     % to export the flux properties
     % 2nd argurment is a string used as an idenfier and will appear in the
     % filenames of each csv output files
-    fluxes = [outputPath iteration_num '_flux_after_manipulation' ]
-    disp(fluxes)
+    fluxes = [outputPath iteration_num '_flux_after_manipulation' ];
     fluxExporter(m, fluxes)
     
 end

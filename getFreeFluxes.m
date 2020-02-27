@@ -46,7 +46,6 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
     freeIndices = [];
     for N = 1:numel(freeFluxes)
         if freeFluxes(N)
-            disp(['freeFluxes(' int2str(N) ') is ' int2str(freeFluxes(N))])
             freeIndices = [freeIndices N];
         end 
     end
@@ -58,6 +57,5 @@ function [myFreeFluxes,allFluxValues] = getFreeFluxes(m,inactive1)
             myFreeFluxes = [myFreeFluxes fluxIDs(N)];
         end
     end
-    disp(myFreeFluxes)
 end
 
